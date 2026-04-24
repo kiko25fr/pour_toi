@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pour toi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:'Inter',sans-serif;
+      background: radial-gradient(circle at top,#0a0c12,#05060a 60%, #000);
+      color:white;
+      overflow-x:hidden;
+    }
+
+    header{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
+      position:relative;
+    }
+
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b') center/cover;
+      opacity:0.25;
+      filter:blur(2px);
+    }
+
+    header > *{position:relative;z-index:1;}
+
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:3.5rem;
+      letter-spacing:1px;
+      cursor:pointer;
+    }
+
+    .subtitle{
+      margin-top:15px;
+      opacity:0.8;
+      max-width:500px;
+      line-height:1.6;
+      font-style:italic;
+    }
+
+    .btn{
+      margin-top:20px;
+      padding:12px 22px;
+      border:none;
+      border-radius:50px;
+      background:rgba(255,255,255,0.1);
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn:hover{transform:scale(1.05);background:rgba(255,255,255,0.2);}
+
+    section{
+      padding:90px 20px;
+      max-width:900px;
+      margin:auto;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:28px;
+      margin-bottom:30px;
+      backdrop-filter:blur(12px);
+      transition:0.3s;
+    }
+
+    .card:hover{transform:translateY(-5px);background:rgba(255,255,255,0.06);}
+
+    h2{
+      font-family:'Playfair Display',serif;
+      margin-bottom:10px;
+    }
+
+    p{opacity:0.85;line-height:1.6;}
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .gallery img{
+     width:120%;
+     height:300px;
+     object-fit:cover;
+     object-position:top;
+	 object-position: center-left;
+	 object-position: center 30%;
+}
+      border-radius:14px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .gallery img:hover{transform:scale(1.05);}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:15px;
+    }
+
+    .dynamic-text{
+      margin-top:12px;
+      opacity:0.9;
+      font-style:italic;
+    }
+     video{
+     width:70%;
+     border-radius:8px;
+     margin-top:8px;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      background:rgba(0,0,0,0.9);
+      z-index:999;
+    }
+
+    .modal img{max-width:90%;max-height:80%;border-radius:12px;}
+
+    footer{
+      text-align:center;
+      padding:60px 20px;
+      opacity:0.6;
+      font-size:0.9rem;
+    }
+
+    #truthBox{
+      margin-top:20px;
+      opacity:0;
+      transition:0.6s;
+      font-style:italic;
+    }
+
+    /* SECRET INPUT (BOTTOM) */
+    #secretWrapper{
+      padding:60px 20px;
+      text-align:center;
+      max-width:900px;
+      margin:auto;
+    }
+
+    #secretInput{
+      margin-top:15px;
+      padding:10px 14px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.2);
+      background:rgba(255,255,255,0.05);
+      color:white;
+      outline:none;
+      text-align:center;
+    }
+
+    #secretInput::placeholder{
+      color:rgba(255,255,255,0.5);
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 onclick="secretClick()">pour toi.</h1>
+  <p class="subtitle">Mon Coeur</p>
+
+  <div class="actions">
+    <button class="btn" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">ouvrir</button>
+    <button class="btn" onclick="openTruth()">un truc</button>
+  </div>
+
+  <div id="truthBox"></div>
+</header>
+
+<section id="content">
+
+  <div class="card">
+    <h2>nous deux</h2>
+    <p>des moments importants.</p>
+
+    <div class="gallery">
+     <img src="photo_5.jpeg">
+     <img src="photo_2.jpeg">
+	 <img src="photo_3.jpeg">
+     <img src="photo_4.jpeg">
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="showMessage(this)">ok ça c’était bien</button>
+      <button class="btn" onclick="showMessage(this)">iciiii</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>dans ma tête et dans mon coeur</h2>
+    <p>Je t'aime</p>
+
+    <div class="actions">
+      <button class="btn" onclick="showMessage(this)">normal ?</button>
+      <button class="btn" onclick="showMessage(this)">ABSOLUMENT !</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Avant-dernier truc</h2>
+    <p>regardes ça, c'est une incroyaaaaable vidéo 🤍</p>
+
+  <video controls>
+  <source src="video.mp4" type="video/mp4">
+</video>
+</video>
+
+</video>
+      <source src="voice.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+<div id="truthBox"></div>
+</header>
+
+<section id="content">
+</section>
+<div class=card:10%
+ <p class="subtitle"> Je vis près de l’eau, je marche un peu bizarrement… et j’ai un cri pas très classe, qui suis-je ?</p>
+<!-- SECRET CODE BOTTOM -->
+<section id="secretWrapper">
+  <input id="secretInput" placeholder="code secret..." />
+  <button class="btn" onclick="checkSecret()">valider</button>
+</section>
+
+<footer></footer>
+
+<div class="modal" id="modal" onclick="closeModal()">
+  <img id="modalImg" />
+</div>
+
+<script>
+const messages=[
+"Tous ces petits moments importants...",
+"Tu me manques",
+"Tes blagues me manques",
+"Et tes cheuveuuuux...",
+"t’as gagné de la place dans mon petit coeur",
+"Souriiiis c'est ton anniversaiiiiiire !"
+];
+
+let i=0;
+echo "# pour-toi" >> README.md
+git init
+git ajouter README.md
+git commit -m "first commit"
+git branche -M main
+git remote ajouter l'origine https://github.com/kiko25fr/pour-toi.git
+git push -u origine principale 
+function showMessage(btn){
+  const card=btn.closest('.card');
+  let p=card.querySelector('.dynamic-text');
+
+  if(!p){
+    p=document.createElement('p');
+    p.className='dynamic-text';
+    card.appendChild(p);
+  }
+
+  p.style.opacity=0;
+
+  setTimeout(()=>{
+    p.innerText=messages[i];
+    p.style.opacity=1;
+    i=(i+1)%messages.length;
+  },200);
+}
+
+function openTruth(){
+  const box=document.getElementById('truthBox');
+  box.innerText="Je t'aime Choucroute 🤍";
+  box.style.opacity=1;
+}
+
+function openModal(src){
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('modalImg').src=src;
+}
+
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+function checkSecret(){
+  const value=document.getElementById("secretInput").value.toLowerCase();
+
+  if(value === "canard"){
+    window.location.href="secret.html";
+  } else {
+    alert("mauvais code 🤍");
+  }
+}
+
+let clicks=0;
+function secretClick(){
+  clicks++;
+}
+</script>
+
+</body>
+</html>
